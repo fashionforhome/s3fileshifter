@@ -2,9 +2,14 @@
 
 require_once('../vendor/autoload.php');
 use Symfony\Component\Console\Application;
+use Executables\FileCommands;
+
+use Executables\FileCommands\Copy;
 
 // TODO implement
 
-$console = new Application();
+FileCommands\FileCommandFactory::getCommand('LocalToS3Copy', array('a', 'b'));
 
-$console->run();
+//$console = new Application();
+//
+//$console->run();
