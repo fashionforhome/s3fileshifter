@@ -6,6 +6,14 @@ use Executables\ExecutableInterface;
 
 abstract class ScanAbstract implements ExecutableInterface
 {
+	/**
+	 * DeleteAbstract constructor.
+	 * @param $path
+	 */
+	public function __construct($path)
+	{
+		$this->path = $path;
+	}
 
 	private $path;
 

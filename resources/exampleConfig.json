@@ -1,0 +1,8 @@
+{
+  "version": "latest",
+  "region": "eu-west-1",
+  "credentials": {
+	"key": "AccessKeyId",
+	"secret": "SecretAccessKey"
+  }
+}
