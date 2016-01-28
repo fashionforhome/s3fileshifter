@@ -2,14 +2,11 @@
 
 namespace Executables\FileCommands;
 
-use Executables\FileCommands\Copy\LocalToS3Copy;
-use Executables\FileCommands\Copy\S3ToLocalCopy;
+use Executables\FileCommands\Copy\DefaultCopy;
 
-use Executables\FileCommands\Scan\LocalScan;
-use Executables\FileCommands\Scan\S3Scan;
+use Executables\FileCommands\Scan\DefaultShift;
 
-use Executables\FileCommands\Delete\LocalDelete;
-use Executables\FileCommands\Delete\S3Delete;
+use Executables\FileCommands\Delete\DefaultDelete;
 
 use Executables\ExecutableInterface;
 
@@ -27,28 +24,21 @@ class FileCommandFactory
 	public static function getCommand($commandName, $arguments)
 	{
 		switch ($commandName) {
-			case 'LocalToS3Copy' :
-				return new LocalToS3Copy($arguments['src'], $arguments['dest']);
-			case 'S3ToLocalCopy' :
-				return new S3ToLocalCopy($arguments['src'], $arguments['dest']);
+			case 'DefaultCopy' :
+				return new DefaultCopy($arguments['src'], $arguments['dest']);
 
-			case 'LocalScan' :
-				return new LocalScan($arguments['path']);
-			case 'S3Scan' :
-				return new S3Scan($arguments['path']);
+			case 'DefaultScan' :
+				return new DefaultShift($arguments['path']);
 
-			case 'LocalDelete' :
-				return new LocalDelete($arguments['path']);
-			case 'S3Delete' :
-				return new S3Delete($arguments['path']);
+			case 'DefaultDelete' :
+				return new DefaultDelete($arguments['path']);
 
 			case 'Shift' :
-				return new Shift($arguments['copy'], $arguments['delete']);
+				return new DefaultShift($arguments['copy'], $arguments['delete']);
 
 			default :
 				throw new \InvalidArgumentException('Command ' . $commandName . ' not found.');
 		}
-
 	}
 
 }

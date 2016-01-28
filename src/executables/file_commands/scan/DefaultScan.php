@@ -3,7 +3,7 @@
 namespace Executables\FileCommands\Scan;
 
 
-class LocalScan extends ScanAbstract
+class DefaultShift extends ShiftAbstract
 {
 	/**
 	 * DeleteAbstract constructor.

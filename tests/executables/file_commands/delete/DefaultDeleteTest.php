@@ -1,10 +1,10 @@
 <?php
 
 use org\bovigo\vfs\vfsStream;
-use Executables\FileCommands\Delete\LocalDelete;
+use Executables\FileCommands\Delete\DefaultDelete;
 use \org\bovigo\vfs\vfsStreamDirectory;
 
-class LocalDeleteTest extends PHPUnit_Framework_TestCase
+class DefaultDeleteTest extends PHPUnit_Framework_TestCase
 {
 	/** @var  vfsStreamDirectory */
 	private $root;
@@ -17,7 +17,7 @@ class LocalDeleteTest extends PHPUnit_Framework_TestCase
 
 	public function testShouldBeAbleToDeleteExistingFile()
 	{
-		$localDelete = new LocalDelete($this->root->url() . '/testfile1');
+		$localDelete = new DefaultDelete($this->root->url() . '/testfile1');
 
 		$localDelete->execute();
 
@@ -30,7 +30,7 @@ class LocalDeleteTest extends PHPUnit_Framework_TestCase
 	 */
 	public function testShouldThrowExceptionWhenFileNotFound()
 	{
-		$localDelete = new LocalDelete($this->root->url() . '/testfile3');
+		$localDelete = new DefaultDelete($this->root->url() . '/testfile3');
 
 		$localDelete->execute();
 	}
@@ -43,7 +43,7 @@ class LocalDeleteTest extends PHPUnit_Framework_TestCase
 		$this->root->chmod(0555);
 		$this->root->getChild('testfile2')->chmod(0555);
 
-		$localDelete = new LocalDelete($this->root->url() . '/testfile2');
+		$localDelete = new DefaultDelete($this->root->url() . '/testfile2');
 
 		$localDelete->execute();
 	}

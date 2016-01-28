@@ -2,7 +2,7 @@
 
 namespace Executables\FileCommands\Delete;
 
-class LocalDelete extends DeleteAbstract
+class DefaultDelete extends DeleteAbstract
 {
 
 	public function __construct($path)
@@ -14,11 +14,11 @@ class LocalDelete extends DeleteAbstract
 	{
 		$fileExists = file_exists($this->getPath());
 
-		if ($fileExists) {
-			if (unlink($this->getPath()) == false) {
-				throw new \RuntimeException('Could not delete file ' . $this->getPath());
-			}
-		} else {
+		if (!$fileExists) {
+			throw new \RuntimeException('Could not delete file ' . $this->getPath());
+		}
+
+		if (unlink($this->getPath()) == false) {
 			throw new \RuntimeException('Could not delete file ' . $this->getPath());
 		}
 	}

@@ -1,10 +1,10 @@
 <?php
 
-use Executables\FileCommands\Scan\LocalScan;
+use Executables\FileCommands\Scan\DefaultShift;
 use org\bovigo\vfs\vfsStream;
 use \org\bovigo\vfs\vfsStreamDirectory;
 
-class LocalScanTest extends PHPUnit_Framework_TestCase
+class DefaultScanTest extends PHPUnit_Framework_TestCase
 {
 	/** @var  vfsStreamDirectory */
 	private $root;
@@ -31,7 +31,7 @@ class LocalScanTest extends PHPUnit_Framework_TestCase
 
 	public function testShouldListAllFilesInAFlatStructure()
 	{
-		$localScan = new LocalScan($this->root->url() . '/testDir1');
+		$localScan = new DefaultShift($this->root->url() . '/testDir1');
 		$expected = array(
 			$this->root->url() . '/testDir1' . DIRECTORY_SEPARATOR . 'testfile11',
 			$this->root->url() . '/testDir1' . DIRECTORY_SEPARATOR . 'testfile12'
@@ -44,7 +44,7 @@ class LocalScanTest extends PHPUnit_Framework_TestCase
 
 	public function testShouldListAllFilesInANestedStructure()
 	{
-		$localScan = new LocalScan($this->root->url() . '/testDir3');
+		$localScan = new DefaultShift($this->root->url() . '/testDir3');
 		$expected = array(
 			$this->root->url() . '/testDir3' . DIRECTORY_SEPARATOR . 'testfile31',
 			$this->root->url() . '/testDir3' . DIRECTORY_SEPARATOR . 'testfile32',
@@ -59,7 +59,7 @@ class LocalScanTest extends PHPUnit_Framework_TestCase
 
 	public function testShouldGiveEmptyArrayForEmptyDir()
 	{
-		$localScan = new LocalScan($this->root->url() . '/testDir2');
+		$localScan = new DefaultShift($this->root->url() . '/testDir2');
 		$expected = array();
 
 		$result = $localScan->execute();
@@ -72,7 +72,7 @@ class LocalScanTest extends PHPUnit_Framework_TestCase
 	 */
 	public function testShouldThrowExceptionIfDirNotExists()
 	{
-		$localScan = new LocalScan($this->root->url() . '/NonExistingDir');
+		$localScan = new DefaultShift($this->root->url() . '/NonExistingDir');
 
 		$localScan->execute();
 	}
@@ -86,7 +86,7 @@ class LocalScanTest extends PHPUnit_Framework_TestCase
 	public function testShouldThrowExceptionWhenPermissionsAreMissingForInitialDir()
 	{
 		$this->root->getChild('testDir1')->chmod(0333);
-		$localScan = new LocalScan($this->root->url() . '/testDir1');
+		$localScan = new DefaultShift($this->root->url() . '/testDir1');
 
 		$localScan->execute();
 	}
