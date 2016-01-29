@@ -3,8 +3,9 @@
 namespace Executables\FileCommands\Scan;
 
 
-class DefaultShift extends ShiftAbstract
+class DefaultScan extends AbstractScan
 {
+
 	/**
 	 * DeleteAbstract constructor.
 	 * @param $path
@@ -16,6 +17,10 @@ class DefaultShift extends ShiftAbstract
 
 	public function execute()
 	{
+		if (is_file($this->getPath())) {
+			return array(basename($this->getPath()));
+		}
+
 		/** @var \RecursiveIteratorIterator $it */
 		$it = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($this->getPath()));
 		$result = array();
@@ -24,7 +29,7 @@ class DefaultShift extends ShiftAbstract
 
 		while ($it->valid()) {
 			if (!$it->isDot()) {
-				$result[] = $it->key();
+				$result[] = $it->getSubPathName();
 			}
 
 			$it->next();

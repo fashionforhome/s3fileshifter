@@ -6,8 +6,6 @@ class S3FileShifterArgumentsValidator
 	private $source;
 	private $destination;
 
-	CONST S3_REGEX = '/^[sS]3:\/\/.*/';
-
 	/**
 	 * S3FileShifterArgumentsValidator constructor.
 	 * @param $destination
@@ -20,25 +18,16 @@ class S3FileShifterArgumentsValidator
 	}
 
 	/**
-	 * Validates if source xor destiny are s3 paths. 
+	 * Validates if source xor destiny are s3 paths.
 	 * @return bool
 	 */
 	public function validate()
 	{
-		if ($this->isS3Path($this->source) XOR $this->isS3Path($this->destination)) {
+		if (PathHelper::isS3Path($this->source) XOR PathHelper::isS3Path($this->destination)) {
 			return true;
 		}
 
 		return false;
-	}
-
-	/**
-	 * @param string $path
-	 * @return bool
-	 */
-	private function isS3Path($path)
-	{
-		return boolval(preg_match(self::S3_REGEX, $path));
 	}
 
 	/**

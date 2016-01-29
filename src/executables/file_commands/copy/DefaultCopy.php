@@ -2,7 +2,7 @@
 
 namespace Executables\FileCommands\Copy;
 
-class DefaultCopy extends CopyAbstract
+class DefaultCopy extends AbstractCopy
 {
 
 	public function __construct($source, $destination)
@@ -19,10 +19,8 @@ class DefaultCopy extends CopyAbstract
 		}
 
 		$test = copy($this->getSource(), $this->getDestination());
-		var_dump($test);
 
 		if ($test === false) {
-			var_dump($this->getSource());
 			throw new \RuntimeException('Could not copy file ' . $this->getSource());
 		}
 	}

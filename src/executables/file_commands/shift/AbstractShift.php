@@ -1,17 +1,14 @@
 <?php
 
-namespace Executables\FileCommands\Copy;
+namespace Executables\FileCommands\Shift;
 
 use Executables\ExecutableInterface;
 
-abstract class CopyAbstract implements ExecutableInterface
+abstract class AbstractShift implements ExecutableInterface
 {
 	
-	private $source;
-	private $destination;
-
 	/**
-	 * CopyAbstract constructor.
+	 * DeleteAbstract constructor.
 	 * @param $source
 	 * @param $destination
 	 */
@@ -21,6 +18,18 @@ abstract class CopyAbstract implements ExecutableInterface
 		$this->destination = $destination;
 	}
 
+	private $source;
+	private $destination;
+
+	/**
+	 * @param mixed $source
+	 * @return AbstractShift
+	 */
+	public function setSource($source)
+	{
+		$this->source = $source;
+		return $this;
+	}
 
 	/**
 	 * @return mixed
@@ -31,12 +40,12 @@ abstract class CopyAbstract implements ExecutableInterface
 	}
 
 	/**
-	 * @param mixed $source
-	 * @return CopyAbstract
+	 * @param mixed $destination
+	 * @return AbstractShift
 	 */
-	public function setSource($source)
+	public function setDestination($destination)
 	{
-		$this->source = $source;
+		$this->destination = $destination;
 		return $this;
 	}
 
@@ -48,14 +57,4 @@ abstract class CopyAbstract implements ExecutableInterface
 		return $this->destination;
 	}
 
-	/**
-	 * @param mixed $destination
-	 * @return CopyAbstract
-	 */
-	public function setDestination($destination)
-	{
-		$this->destination = $destination;
-		return $this;
-	}
-	
 }

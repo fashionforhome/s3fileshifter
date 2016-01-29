@@ -4,11 +4,12 @@ namespace Executables\FileCommands;
 
 use Executables\FileCommands\Copy\DefaultCopy;
 
-use Executables\FileCommands\Scan\DefaultShift;
+use Executables\FileCommands\Scan\DefaultScan;
 
 use Executables\FileCommands\Delete\DefaultDelete;
 
 use Executables\ExecutableInterface;
+use Executables\FileCommands\Shift\DefaultShift;
 
 class FileCommandFactory
 {
@@ -28,13 +29,13 @@ class FileCommandFactory
 				return new DefaultCopy($arguments['src'], $arguments['dest']);
 
 			case 'DefaultScan' :
-				return new DefaultShift($arguments['path']);
+				return new DefaultScan($arguments['path']);
 
 			case 'DefaultDelete' :
 				return new DefaultDelete($arguments['path']);
 
-			case 'Shift' :
-				return new DefaultShift($arguments['copy'], $arguments['delete']);
+			case 'DefaultShift' :
+				return new DefaultShift($arguments['src'], $arguments['dest']);
 
 			default :
 				throw new \InvalidArgumentException('Command ' . $commandName . ' not found.');

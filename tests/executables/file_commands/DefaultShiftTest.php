@@ -1,6 +1,6 @@
 <?php
 
-use Executables\FileCommands\DefaultShift;
+use Executables\FileCommands\Shift\DefaultShift;
 use org\bovigo\vfs\vfsStream;
 use \org\bovigo\vfs\vfsStreamDirectory;
 use org\bovigo\vfs\vfsStreamFile;
@@ -22,38 +22,29 @@ class DefaultShiftTest extends PHPUnit_Framework_TestCase
 		$copy->execute();
 
 		$this->assertEquals(2, count($this->root->getChildren()));
-		$this->assertEquals('testfile1Shifted', $this->root->getChildren()[1]->getName());
+		$this->assertNull($this->root->getChild('testfile1'));
 	}
 
 	public function testFileIsOnDestinationAfterShift()
 	{
-		$this->root->addChild(vfsStream::newFile('testfile1Shifted')->setContent('TestContent'));
+		$shift = new DefaultShift($this->root->url() . '/testfile1', $this->root->url() . '/testfile1Shifted');
+		$shift->execute();
 
-		$copy = new DefaultShift($this->root->url() . '/testfile1', $this->root->url() . '/testfile1Shifted');
-		$copy->execute();
+		/** @var vfsStreamFile $shiftedFile */
+		$shiftedFile = $this->root->getChild('testfile1Shifted');
 
-		/** @var vfsStreamFile $copiedFile */
-		$copiedFile = $this->root->getChild('testfile1copy');
-
-		$this->assertEquals('testfile1copy', $copiedFile->getName());
-		$this->assertEquals('TestContent', $copiedFile->getContent());
+		$this->assertNotNull($shiftedFile);
+		$this->assertEquals('testfile1Shifted', $shiftedFile->getName());
+		$this->assertEquals('TestContent', $shiftedFile->getContent());
 	}
 
-	public function testShouldThrowExceptionIfReadIsNotPermitted()
-	{
-		
-	}
-
-	public function testShouldThrowExceptionIfWriteIsNotPermitted()
-	{
-		
-	}
-
+	/**
+	 * @expectedException RuntimeException
+	 */
 	public function testShouldThrowExceptionIfSourceFileNotFound()
 	{
+		$shift = new DefaultShift($this->root->url() . '/nonexistentfile', $this->root->url() . '/testfile1Shifted');
+		$shift->execute();
 	}
 
-	public function testShouldThrowExceptionIfDestinationPathNotFound()
-	{
-	}
 }

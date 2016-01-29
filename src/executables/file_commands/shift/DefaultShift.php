@@ -1,13 +1,25 @@
 <?php
 
-namespace Executables\FileCommands;
+namespace Executables\FileCommands\Shift;
 
-use Executables\ExecutableInterface;
+use Executables\FileCommands\Copy\DefaultCopy;
+use Executables\FileCommands\Delete\DefaultDelete;
 
-class DefaultShift implements ExecutableInterface
+class DefaultShift extends AbstractShift
 {
+
+	public function __construct($source, $destination)
+	{
+		parent::__construct($source, $destination);
+	}
+
 	public function execute()
 	{
-		// TODO: Implement execute() method.
+		$delete = new DefaultDelete($this->getSource());
+		$copy = new DefaultCopy($this->getSource(), $this->getDestination());
+
+		$copy->execute();
+		$delete->execute();
 	}
+
 }

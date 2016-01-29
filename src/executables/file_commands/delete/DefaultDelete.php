@@ -2,7 +2,7 @@
 
 namespace Executables\FileCommands\Delete;
 
-class DefaultDelete extends DeleteAbstract
+class DefaultDelete extends AbstractDelete
 {
 
 	public function __construct($path)

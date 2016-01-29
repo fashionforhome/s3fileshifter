@@ -39,16 +39,4 @@ class DefaultCopyTest extends PHPUnit_Framework_TestCase
 		$copy->execute();
 	}
 
-	/**
-	 * @depends testShouldBeAbleToCopyFile
-	 * @depends testShouldThrowExceptionWhenFileNotFound
-	 * @expectedException RuntimeException
-	 */
-	public function testShouldThrowExceptionWhenWritingNotPermitted()
-	{
-		$this->root->chmod(0333);
-		$copy = new DefaultCopy($this->root->url() . '/testfile1', $this->root->url() . '/testfile1copy');
-		$copy->execute();
-	}
-
 }

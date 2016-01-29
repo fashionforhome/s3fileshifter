@@ -1,5 +1,5 @@
 <phpunit
-		bootstrap="vendor/autoload.php"
+		bootstrap="src/Bootstrap.php"
 		backupGlobals="false"
 		backupStaticAttributes="false"
 		syntaxCheck="false">

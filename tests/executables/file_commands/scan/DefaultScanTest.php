@@ -1,6 +1,6 @@
 <?php
 
-use Executables\FileCommands\Scan\DefaultShift;
+use Executables\FileCommands\Scan\DefaultScan;
 use org\bovigo\vfs\vfsStream;
 use \org\bovigo\vfs\vfsStreamDirectory;
 
@@ -31,10 +31,10 @@ class DefaultScanTest extends PHPUnit_Framework_TestCase
 
 	public function testShouldListAllFilesInAFlatStructure()
 	{
-		$localScan = new DefaultShift($this->root->url() . '/testDir1');
+		$localScan = new DefaultScan($this->root->url() . '/testDir1');
 		$expected = array(
-			$this->root->url() . '/testDir1' . DIRECTORY_SEPARATOR . 'testfile11',
-			$this->root->url() . '/testDir1' . DIRECTORY_SEPARATOR . 'testfile12'
+			'testfile11',
+			'testfile12'
 		);
 
 		$result = $localScan->execute();
@@ -44,12 +44,24 @@ class DefaultScanTest extends PHPUnit_Framework_TestCase
 
 	public function testShouldListAllFilesInANestedStructure()
 	{
-		$localScan = new DefaultShift($this->root->url() . '/testDir3');
+		$localScan = new DefaultScan($this->root->url() . '/testDir3');
 		$expected = array(
-			$this->root->url() . '/testDir3' . DIRECTORY_SEPARATOR . 'testfile31',
-			$this->root->url() . '/testDir3' . DIRECTORY_SEPARATOR . 'testfile32',
-			$this->root->url() . '/testDir3' . DIRECTORY_SEPARATOR . 'testDir31' . DIRECTORY_SEPARATOR . 'testfile311',
-			$this->root->url() . '/testDir3' . DIRECTORY_SEPARATOR . 'testDir31' . DIRECTORY_SEPARATOR . 'testfile312'
+			'testfile31',
+			'testfile32',
+			'testDir31' . DIRECTORY_SEPARATOR . 'testfile311',
+			'testDir31' . DIRECTORY_SEPARATOR . 'testfile312'
+		);
+
+		$result = $localScan->execute();
+
+		$this->assertSame($expected, $result);
+	}
+
+	public function testShouldBeAbleToListASingleFile()
+	{
+		$localScan = new DefaultScan($this->root->url() . '/testDir1/testfile11');
+		$expected = array(
+			'testfile11'
 		);
 
 		$result = $localScan->execute();
@@ -59,7 +71,7 @@ class DefaultScanTest extends PHPUnit_Framework_TestCase
 
 	public function testShouldGiveEmptyArrayForEmptyDir()
 	{
-		$localScan = new DefaultShift($this->root->url() . '/testDir2');
+		$localScan = new DefaultScan($this->root->url() . '/testDir2');
 		$expected = array();
 
 		$result = $localScan->execute();
@@ -72,7 +84,7 @@ class DefaultScanTest extends PHPUnit_Framework_TestCase
 	 */
 	public function testShouldThrowExceptionIfDirNotExists()
 	{
-		$localScan = new DefaultShift($this->root->url() . '/NonExistingDir');
+		$localScan = new DefaultScan($this->root->url() . '/NonExistingDir');
 
 		$localScan->execute();
 	}
@@ -86,7 +98,7 @@ class DefaultScanTest extends PHPUnit_Framework_TestCase
 	public function testShouldThrowExceptionWhenPermissionsAreMissingForInitialDir()
 	{
 		$this->root->getChild('testDir1')->chmod(0333);
-		$localScan = new DefaultShift($this->root->url() . '/testDir1');
+		$localScan = new DefaultScan($this->root->url() . '/testDir1');
 
 		$localScan->execute();
 	}

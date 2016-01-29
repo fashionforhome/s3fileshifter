@@ -1,14 +1,12 @@
 <?php
 
-namespace Executables\FileCommands\Delete;
+namespace Executables\FileCommands\Scan;
 
 use Executables\ExecutableInterface;
 
-abstract class DeleteAbstract implements ExecutableInterface
+abstract class AbstractScan implements ExecutableInterface
 {
-
-	private $path;
-
+	
 	/**
 	 * DeleteAbstract constructor.
 	 * @param $path
@@ -17,6 +15,8 @@ abstract class DeleteAbstract implements ExecutableInterface
 	{
 		$this->path = $path;
 	}
+
+	private $path;
 
 	/**
 	 * @return mixed
@@ -28,7 +28,7 @@ abstract class DeleteAbstract implements ExecutableInterface
 
 	/**
 	 * @param mixed $path
-	 * @return DeleteAbstract
+	 * @return AbstractScan
 	 */
 	public function setPath($path)
 	{
