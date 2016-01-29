@@ -17,7 +17,7 @@ $commandDefinition = array(
 
 $commandDescription = 'Shifts a file from S3 to the local or vice versa.';
 
-$commandHelp = 'The <info>s3fileshifter</info> will shift a file or a whole directory from local to S3 or vice versa.' . PHP_EOL .
+$commandHelp = 'The <info>s3fileshifter</info> will shift a file or a whole directory from the local filesystem to S3 or vice versa.' . PHP_EOL .
 	' Note that one of the input arguments must use the S3 protocol and the other one a valid path to a file or directory in the local filesystem.' . PHP_EOL .
 	'<comment>Samples:</comment>' . PHP_EOL . 'To copy a directory from S3 to local:<info>php S3FileShifter.php s3fileshifter s3://bucket/directory /tmp/destination_directory</info>' . PHP_EOL .
 	'To copy a file from local to S3<info>php S3FileShifter.php s3fileshifter /tmp/file.example s3://bucket/destination_directory</info>';
