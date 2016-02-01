@@ -1,27 +1,31 @@
 {
-  "name": "fashionforhome/s3fileshifter",
-  "description": "This tool helps you to shift files from a server to s3 or the other way round.",
-  "type": "project",
-  "require": {
-	"php": ">=5.5",
-	"symfony/console": "^3.0",
-	"aws/aws-sdk-php": "^3.14"
-  },
-  "require-dev": {
-	"phpunit/phpunit": "4.8.*",
-	"mikey179/vfsStream": "^1.6"
-  },
-  "license": "GPL-3.0",
-  "authors": [
-	{
-	  "name": "Daniel Schulz",
-	  "email": "daniel.schulz@fashionforhome.de"
+	"name": "fashionforhome/s3fileshifter",
+	"description": "This tool helps you to shift files from a server to s3 or the other way round.",
+	"type": "project",
+	"require": {
+		"php": ">=5.5",
+		"symfony/console": "^3.0",
+		"aws/aws-sdk-php": "^3.14"
+	},
+	"require-dev": {
+		"phpunit/phpunit": "4.8.*",
+		"mikey179/vfsStream": "^1.6"
+	},
+	"license": "GPL-3.0",
+	"authors": [
+		{
+			"name": "Daniel Schulz",
+			"email": "daniel.schulz@fashionforhome.de"
+		},
+		{
+			"name": "Christoph Jaecks",
+			"email": "christoph.jaecks@fashionforhome.de"
+		}
+	],
+	"autoload": {
+		"classmap": [
+			"src",
+			"tests"
+		]
 	}
-  ],
-  "autoload": {
-	"classmap": [
-	  "src",
-	  "tests"
-	]
-  }
 }

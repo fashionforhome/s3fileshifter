@@ -10,7 +10,7 @@ class PathHelperTest extends PHPUnit_Framework_TestCase
 
 	public function setUp()
 	{
-		$structure = array('testfile1' => '');
+		$structure  = array('testfile1' => '');
 		$this->root = vfsStream::setup('root', null, $structure);
 	}
 

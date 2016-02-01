@@ -6,7 +6,9 @@ use Executables\ExecutableInterface;
 
 abstract class AbstractScan implements ExecutableInterface
 {
-	
+	/** @var string $path */
+	private $path;
+
 	/**
 	 * DeleteAbstract constructor.
 	 * @param $path
@@ -15,8 +17,6 @@ abstract class AbstractScan implements ExecutableInterface
 	{
 		$this->path = $path;
 	}
-
-	private $path;
 
 	/**
 	 * @return mixed
@@ -33,6 +33,7 @@ abstract class AbstractScan implements ExecutableInterface
 	public function setPath($path)
 	{
 		$this->path = $path;
+
 		return $this;
 	}
 

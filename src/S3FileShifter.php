@@ -24,25 +24,20 @@ $commandHelp = 'The <info>s3fileshifter</info> will shift a file or a whole dire
 
 $commandLogic = function (InputInterface $input, OutputInterface $output) {
 
-	$source = $input->getArgument('source');
+	$source      = $input->getArgument('source');
 	$destination = $input->getArgument('destination');
-
-	$validator = new S3FileShifterArgumentsValidator($destination, $source);
+	$validator   = new S3FileShifterArgumentsValidator($destination, $source);
 
 	if ($validator->validate() === false) {
 		$output->writeln('<error>One of the paths needs to have the "s3://" protocol</error>');
+
 		return;
 	}
 
-
-	
-	$scan = FileCommandFactory::getCommand('DefaultScan', array('path' => $source));
+	$scan            = FileCommandFactory::getCommand('DefaultScan', array('path' => $source));
 	$sourceFilePaths = $scan->execute();
 
 	foreach ($sourceFilePaths as $currentRelativePath) {
-
-		echo PathHelper::buildPath($source, $currentRelativePath);
-
 		$shift = FileCommandFactory::getCommand('DefaultShift',
 			array(
 				'src' => PathHelper::buildPath($source, $currentRelativePath),
@@ -51,7 +46,6 @@ $commandLogic = function (InputInterface $input, OutputInterface $output) {
 		);
 		$shift->execute();
 	}
-
 };
 
 $console = new Application();

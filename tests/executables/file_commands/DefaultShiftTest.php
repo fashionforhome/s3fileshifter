@@ -12,7 +12,7 @@ class DefaultShiftTest extends PHPUnit_Framework_TestCase
 
 	public function setUp()
 	{
-		$structure = array('testfile1' => 'TestContent', 'testfile2' => 'TestContent2');
+		$structure  = array('testfile1' => 'TestContent', 'testfile2' => 'TestContent2');
 		$this->root = vfsStream::setup('root', null, $structure);
 	}
 

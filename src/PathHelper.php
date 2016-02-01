@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Helper Class to build a Pass for 
+ * 
+ * Class PathHelper
+ */
 class PathHelper
 {
 	CONST S3_REGEX = '/^[sS]3:\/\/.*/';

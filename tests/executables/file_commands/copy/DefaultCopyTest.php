@@ -12,7 +12,7 @@ class DefaultCopyTest extends PHPUnit_Framework_TestCase
 
 	public function setUp()
 	{
-		$structure = array('testfile1' => 'TestContent');
+		$structure  = array('testfile1' => 'TestContent');
 		$this->root = vfsStream::setup('root', null, $structure);
 	}
 

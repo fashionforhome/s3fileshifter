@@ -32,7 +32,7 @@ class S3FileShifterValidatorTest extends PHPUnit_Framework_TestCase
 	 */
 	public function testFailedValidationBothS3()
 	{
-		$source = 's3://superAwesomeTestBucket';
+		$source  = 's3://superAwesomeTestBucket';
 		$destiny = 'S3://NotSoAwesomeTestBucket';
 
 		$validator = new S3FileShifterArgumentsValidator($source, $destiny);
@@ -45,7 +45,7 @@ class S3FileShifterValidatorTest extends PHPUnit_Framework_TestCase
 	 */
 	public function testFailedValidationBothLocal()
 	{
-		$source = '/home';
+		$source  = '/home';
 		$destiny = '/temp';
 
 		$validator = new S3FileShifterArgumentsValidator($source, $destiny);

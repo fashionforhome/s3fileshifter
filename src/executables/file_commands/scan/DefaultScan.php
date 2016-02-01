@@ -22,9 +22,10 @@ class DefaultScan extends AbstractScan
 		}
 
 		/** @var \RecursiveIteratorIterator $it */
-		$it = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($this->getPath()));
+		$it     = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($this->getPath()));
 		$result = array();
 
+		// iterate over the directory and its subdirectories
 		$it->rewind();
 
 		while ($it->valid()) {

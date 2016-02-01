@@ -6,7 +6,12 @@ use Executables\ExecutableInterface;
 
 abstract class AbstractShift implements ExecutableInterface
 {
-	
+	/** @var string $source */
+	private $source;
+
+	/** @var string $source */
+	private $destination;
+
 	/**
 	 * DeleteAbstract constructor.
 	 * @param $source
@@ -14,12 +19,9 @@ abstract class AbstractShift implements ExecutableInterface
 	 */
 	public function __construct($source, $destination)
 	{
-		$this->source = $source;
+		$this->source      = $source;
 		$this->destination = $destination;
 	}
-
-	private $source;
-	private $destination;
 
 	/**
 	 * @param mixed $source
@@ -28,6 +30,7 @@ abstract class AbstractShift implements ExecutableInterface
 	public function setSource($source)
 	{
 		$this->source = $source;
+
 		return $this;
 	}
 
@@ -46,6 +49,7 @@ abstract class AbstractShift implements ExecutableInterface
 	public function setDestination($destination)
 	{
 		$this->destination = $destination;
+
 		return $this;
 	}
 

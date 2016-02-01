@@ -14,7 +14,7 @@ class S3FileShifterArgumentsValidator
 	public function __construct($destination, $source)
 	{
 		$this->destination = $destination;
-		$this->source = $source;
+		$this->source      = $source;
 	}
 
 	/**
@@ -37,6 +37,7 @@ class S3FileShifterArgumentsValidator
 	public function setSource($source)
 	{
 		$this->source = $source;
+
 		return $this;
 	}
 
@@ -47,6 +48,7 @@ class S3FileShifterArgumentsValidator
 	public function setDestination($destination)
 	{
 		$this->destination = $destination;
+
 		return $this;
 	}
 

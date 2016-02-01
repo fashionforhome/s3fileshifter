@@ -11,7 +11,7 @@ class DefaultDeleteTest extends PHPUnit_Framework_TestCase
 
 	public function setUp()
 	{
-		$structure = array('testfile1' => '', 'testfile2' => '');
+		$structure  = array('testfile1' => '', 'testfile2' => '');
 		$this->root = vfsStream::setup('root', null, $structure);
 	}
 

@@ -33,6 +33,7 @@ abstract class AbstractDelete implements ExecutableInterface
 	public function setPath($path)
 	{
 		$this->path = $path;
+
 		return $this;
 	}
 

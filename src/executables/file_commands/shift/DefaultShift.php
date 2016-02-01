@@ -16,7 +16,7 @@ class DefaultShift extends AbstractShift
 	public function execute()
 	{
 		$delete = new DefaultDelete($this->getSource());
-		$copy = new DefaultCopy($this->getSource(), $this->getDestination());
+		$copy   = new DefaultCopy($this->getSource(), $this->getDestination());
 
 		$copy->execute();
 		$delete->execute();
