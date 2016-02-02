@@ -60,8 +60,8 @@ $console
 
 $input = new ArrayInput(array(
 	'command' => 's3fileshifter',
-	$argv[1],
-	$argv[2]
+	'source' => $argv[1],
+	'destination' => $argv[2]
 ));
 
 $console->run($input);
