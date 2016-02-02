@@ -6,6 +6,7 @@ use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Input\ArrayInput;
 use Executables\FileCommands\FileCommandFactory;
 
 $commandName = 's3fileshifter';
@@ -24,9 +25,9 @@ $commandHelp = 'The <info>s3fileshifter</info> will shift a file or a whole dire
 
 $commandLogic = function (InputInterface $input, OutputInterface $output) {
 
-	$source      = $input->getArgument('source');
+	$source = $input->getArgument('source');
 	$destination = $input->getArgument('destination');
-	$validator   = new S3FileShifterArgumentsValidator($destination, $source);
+	$validator = new S3FileShifterArgumentsValidator($destination, $source);
 
 	if ($validator->validate() === false) {
 		$output->writeln('<error>One of the paths needs to have the "s3://" protocol</error>');
@@ -34,7 +35,7 @@ $commandLogic = function (InputInterface $input, OutputInterface $output) {
 		return;
 	}
 
-	$scan            = FileCommandFactory::getCommand('DefaultScan', array('path' => $source));
+	$scan = FileCommandFactory::getCommand('DefaultScan', array('path' => $source));
 	$sourceFilePaths = $scan->execute();
 
 	foreach ($sourceFilePaths as $currentRelativePath) {
@@ -57,4 +58,10 @@ $console
 	->setHelp($commandHelp)
 	->setCode($commandLogic);
 
-$console->run();
+$input = new ArrayInput(array(
+	'command' => 's3fileshifter',
+	$argv[1],
+	$argv[2]
+));
+
+$console->run($input);
